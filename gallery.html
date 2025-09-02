@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Necromancer Gallery - GraveGrounds Faction Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="gallery-page">
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.75rem;">
+                        <span>GraveGrounds</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#factions" class="nav-link">Factions</a>
+                    <a href="gallery.html" class="nav-link active">Gallery</a>
+                    <a href="search.html" class="nav-link">Search</a>
+                </div>
+                <div class="nav-search">
+                    <div class="nav-search-container">
+                        <input type="text" placeholder="Search players..." class="nav-search-input">
+                        <button class="nav-search-btn" onclick="window.location.href='search.html'">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="nav-auth">
+                    <div class="connection-status" id="connectionStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Connecting...</span>
+                    </div>
+                    <button id="loginBtn" class="btn btn-outline">Login</button>
+                    <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Gallery Hero Section -->
+        <section class="gallery-hero">
+            <div class="container">
+                <div class="gallery-hero-content">
+                    <h1 class="gallery-title">Necromancer Gallery</h1>
+                    <p class="gallery-subtitle">Explore the dark artistry and character designs of Kelrûn's most powerful necromancers. From skeletal warriors to shadow-wielding mages, discover the diverse creations of our community.</p>
+                    <div class="gallery-hero-actions">
+                        <button class="btn btn-primary btn-large" id="uploadBtn">Upload Your Necromancer</button>
+                        <button class="btn btn-outline btn-large" id="filterBtn">
+                            <i class="fas fa-filter"></i>
+                            Filter by Faction
+                        </button>
+                        <a href="search.html" class="btn btn-outline btn-large">
+                            <i class="fas fa-search"></i>
+                            Find Other Players
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Filters -->
+        <section class="gallery-filters">
+            <div class="container">
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="factionFilter">Faction:</label>
+                        <select id="factionFilter">
+                            <option value="">All Factions</option>
+                            <option value="bone-march">Bone March</option>
+                            <option value="choir-silence">Choir of Silence</option>
+                            <option value="cult-withered-flame">Cult of the Withered Flame</option>
+                            <option value="gravewrought-court">Gravewrought Court</option>
+                            <option value="swarm-mireborn">Swarm of the Mireborn</option>
+                            <option value="dawnflame-order">DawnFlame Order</option>
+                            <option value="hollowed-redeemed">Hollowed Redeemed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortBy">Sort by:</label>
+                        <select id="sortBy">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="faction">Faction</option>
+                            <option value="username">Creator</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="searchGallery">Search:</label>
+                        <input type="text" id="searchGallery" placeholder="Search characters or descriptions...">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-main">
+            <div class="container">
+                <div class="gallery-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalCharacters">0</span>
+                        <span class="stat-label">Total Characters</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="activeFactions">0</span>
+                        <span class="stat-label">Active Factions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalCreators">0</span>
+                        <span class="stat-label">Total Creators</span>
+                    </div>
+                </div>
+
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items will be dynamically populated here -->
+                </div>
+
+                <div class="gallery-pagination" id="galleryPagination">
+                    <!-- Pagination controls will be added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Modal -->
+        <div id="uploadModal" class="modal">
+            <div class="modal-content upload-modal">
+                <span class="close">&times;</span>
+                <h2>Upload Your Necromancer</h2>
+                <div class="modal-body">
+                    <form id="uploadForm">
+                        <div class="form-group">
+                            <label for="characterName">Character Name *</label>
+                            <input type="text" id="characterName" required placeholder="Enter your character's name">
+                        </div>
+                        <div class="form-group">
+                            <label for="characterDescription">Description</label>
+                            <textarea id="characterDescription" rows="4" placeholder="Describe your character's appearance, abilities, or backstory..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="characterImage">Character Image</label>
+                            <input type="file" id="characterImage" accept="image/*" required>
+                            <small>Upload an image of your necromancer character (JPG, PNG, GIF - Max 5MB)</small>
+                            <div id="imagePreview" class="image-preview" style="display: none;">
+                                <img id="previewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; margin-top: 10px; border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="characterFaction">Faction</label>
+                            <select id="characterFaction" required>
+                                <option value="">Select your faction...</option>
+                                <option value="bone-march">Bone March</option>
+                                <option value="choir-silence">Choir of Silence</option>
+                                <option value="cult-withered-flame">Cult of the Withered Flame</option>
+                                <option value="gravewrought-court">Gravewrought Court</option>
+                                <option value="swarm-mireborn">Swarm of the Mireborn</option>
+                                <option value="dawnflame-order">DawnFlame Order</option>
+                                <option value="hollowed-redeemed">Hollowed Redeemed</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeUploadModal()">Cancel</button>
+                    <button type="submit" form="uploadForm" class="btn btn-primary">Upload Character</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Modal -->
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+                <div class="modal-body">
+                    <div id="loginForm" class="auth-form active">
+                        <form>
+                            <div class="form-group">
+                                <label for="loginEmail">Email</label>
+                                <input type="email" id="loginEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Password</label>
+                                <input type="password" id="loginPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Login</button>
+                            <div class="form-footer">
+                                <a href="#" id="forgotPasswordLink" class="forgot-password-link">Forgot Password?</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="signupForm" class="auth-form">
+                        <form>
+                            <div class="form-group">
+                                <label for="signupUsername">Username</label>
+                                <input type="text" id="signupUsername" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signupEmail">Email</label>
+                                <input type="email" id="signupEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signupPassword">Password</label>
+                                <input type="password" id="signupPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signupFaction">Choose Faction</label>
+                                <select id="signupFaction" required>
+                                    <option value="">Select a faction...</option>
+                                    <option value="bone-march">Bone March</option>
+                                    <option value="choir-silence">Choir of Silence</option>
+                                    <option value="cult-withered-flame">Cult of the Withered Flame</option>
+                                    <option value="gravewrought-court">Gravewrought Court</option>
+                                    <option value="swarm-mireborn">Swarm of the Mireborn</option>
+                                    <option value="dawnflame-order">DawnFlame Order</option>
+                                    <option value="hollowed-redeemed">Hollowed Redeemed</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                            <div class="form-footer">
+                                <small class="email-verification-note">
+                                    <i class="fas fa-info-circle"></i>
+                                    You'll receive a verification email to activate your account
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Artwork Modal -->
+        <div id="artworkModal" class="modal artwork-modal">
+            <!-- Modal content will be dynamically inserted here -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>GraveGrounds</h4>
+                        <p>Track your faction's power and build your necromancer identity.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#factions">Factions</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="index.html#profile">Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 GraveGrounds. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="gallery.js?v=3"></script>
+</body>
+</html>

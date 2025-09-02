@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - GraveGrounds Faction Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <span>GraveGrounds</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#factions" class="nav-link">Factions</a>
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="profile.html" class="nav-link active">Profile</a>
+                    <a href="search.html" class="nav-link">Search</a>
+                </div>
+                <div class="nav-search">
+                    <div class="nav-search-container">
+                        <input type="text" placeholder="Search players..." class="nav-search-input">
+                        <button class="nav-search-btn" onclick="window.location.href='search.html'">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="nav-auth">
+                    <div class="connection-status" id="connectionStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Connecting...</span>
+                    </div>
+                    <button id="loginBtn" class="btn btn-outline">Login</button>
+                    <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Profile Hero Section -->
+        <section class="profile-hero">
+            <div class="container">
+                <div class="profile-hero-content">
+                    <div class="profile-hero-info">
+                        <div class="profile-avatar-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-hero-details">
+                            <h1 id="profileHeroUsername">Username</h1>
+                            <p id="profileHeroFaction">Faction</p>
+                            <p id="profileHeroEmail">Email</p>
+                        </div>
+                    </div>
+                    <div class="profile-hero-stats">
+                        <div class="hero-stat">
+                            <span class="stat-number" id="profileHeroRank">--</span>
+                            <span class="stat-label">Faction Rank</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="stat-number" id="profileHeroMemberSince">--</span>
+                            <span class="stat-label">Member Since</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="stat-number" id="profileHeroContribution">--</span>
+                            <span class="stat-label">Contribution</span>
+                        </div>
+                        <div class="hero-stat theme-indicator">
+                            <span class="stat-number">
+                                <i class="fas fa-palette" id="themeIndicatorIcon"></i>
+                            </span>
+                            <span class="stat-label">Theme Active</span>
+                            <div class="theme-color-preview" id="themeColorPreview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Main Content -->
+        <section class="profile-main">
+            <div class="container">
+                <div class="profile-grid">
+                    <!-- Profile Actions -->
+                    <div class="profile-actions-card">
+                        <h3>Profile Actions</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary btn-full" id="editProfileBtn">
+                                <i class="fas fa-edit"></i>
+                                Edit Profile
+                            </button>
+                            <button class="btn btn-outline btn-full" id="changeFactionBtn">
+                                <i class="fas fa-exchange-alt"></i>
+                                Change Faction
+                            </button>
+                            <button class="btn btn-outline btn-full" id="uploadAvatarBtn">
+                                <i class="fas fa-camera"></i>
+                                Upload Avatar
+                            </button>
+                            <button class="btn btn-outline btn-full" id="privacySettingsBtn">
+                                <i class="fas fa-shield-alt"></i>
+                                Privacy Settings
+                            </button>
+                            <button class="btn btn-outline btn-full" id="customizeThemeBtn">
+                                <i class="fas fa-palette"></i>
+                                Customize Theme
+                            </button>
+                            <a href="search.html" class="btn btn-outline btn-full">
+                                <i class="fas fa-search"></i>
+                                Find Other Players
+                            </a>
+                            <button class="btn btn-danger btn-full" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </button>
+                            <button class="btn btn-danger btn-full" id="deleteAccountBtn" style="margin-top: 10px;">
+                                <i class="fas fa-trash-alt"></i>
+                                Delete Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Profile Details -->
+                    <div class="profile-details-card">
+                        <h3>Profile Details</h3>
+                        <div class="detail-item">
+                            <label>Username</label>
+                            <p id="profileDetailUsername">Username</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Email</label>
+                            <p id="profileDetailEmail">Email</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Faction</label>
+                            <p id="profileDetailFaction">Faction</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Join Date</label>
+                            <p id="profileDetailJoinDate">Join Date</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Last Active</label>
+                            <p id="profileDetailLastActive">Last Active</p>
+                        </div>
+                    </div>
+
+                    <!-- Faction Information -->
+                    <div class="faction-info-card">
+                        <h3>Faction Information</h3>
+                        <div class="faction-details">
+                            <div class="faction-name">
+                                <h4 id="factionName">Faction Name</h4>
+                            </div>
+                            <div class="faction-icon-large">
+                                <img id="factionIcon" src="" alt="Faction Icon">
+                            </div>
+                            <div class="faction-stats">
+                                <div class="faction-stat">
+                                    <span class="stat-label">Faction Rank</span>
+                                    <span class="stat-value" id="factionRank">--</span>
+                                </div>
+                                <div class="faction-stat">
+                                    <span class="stat-label">Members</span>
+                                    <span class="stat-value" id="factionMembers">--</span>
+                                </div>
+                                <div class="faction-stat">
+                                    <span class="stat-label">Weekly Growth</span>
+                                    <span class="stat-value" id="factionGrowth">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Feed -->
+                    <div class="activity-feed-card">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list" id="activityList">
+                            <div class="activity-item">
+                                <i class="fas fa-user-plus"></i>
+                                <div class="activity-content">
+                                    <p>Joined the faction</p>
+                                    <span class="activity-time">Just now</span>
+                                </div>
+                            </div>
+                            <!-- More activity items will be added dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div class="achievements-card">
+                        <h3>Achievements</h3>
+                        <div class="achievements-grid" id="achievementsGrid">
+                            <div class="achievement-item locked">
+                                <i class="fas fa-trophy"></i>
+                                <h4>First Steps</h4>
+                                <p>Join your first faction</p>
+                            </div>
+                            <div class="achievement-item locked">
+                                <i class="fas fa-users"></i>
+                                <h4>Social Butterfly</h4>
+                                <p>Interact with 10 other members</p>
+                            </div>
+                            <div class="achievement-item locked">
+                                <i class="fas fa-star"></i>
+                                <h4>Rising Star</h4>
+                                <p>Reach rank 5 in your faction</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Artwork -->
+                    <div class="my-artwork-card">
+                        <div class="artwork-header">
+                            <h3>My Artwork</h3>
+                            <a href="gallery.html" class="btn btn-outline btn-sm">
+                                <i class="fas fa-plus"></i> Upload More
+                            </a>
+                        </div>
+                        <div class="artwork-stats">
+                            <div class="artwork-stat">
+                                <span class="stat-label">Total Uploads</span>
+                                <span class="stat-value" id="totalUploads">0</span>
+                            </div>
+                            <div class="artwork-stat">
+                                <span class="stat-label">This Month</span>
+                                <span class="stat-value" id="monthlyUploads">0</span>
+                            </div>
+                        </div>
+                        <div class="artwork-grid" id="myArtworkGrid">
+                            <div class="empty-artwork">
+                                <i class="fas fa-images"></i>
+                                <h4>No Artwork Yet</h4>
+                                <p>Start building your necromancer gallery by uploading your first character!</p>
+                                <a href="gallery.html" class="btn btn-primary">Upload Artwork</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="settings-card">
+                        <h3>Account Settings</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <label>Email Notifications</label>
+                                <input type="checkbox" id="emailNotifications" checked>
+                            </div>
+                            <div class="setting-item">
+                                <label>Profile Visibility</label>
+                                <select id="profileVisibility">
+                                    <option value="public">Public</option>
+                                    <option value="faction-only">Faction Only</option>
+                                    <option value="private">Private</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Two-Factor Authentication</label>
+                                <button class="btn btn-outline btn-sm" id="enable2FABtn">Enable</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>GraveGrounds</h4>
+                        <p>Track your faction's power and build your necromancer identity.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#factions">Factions</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 GraveGrounds. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <form>
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+            </div>
+            <div id="signupForm" class="auth-form">
+                <form>
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupFaction">Choose Faction</label>
+                        <select id="signupFaction" required>
+                            <option value="">Select a faction...</option>
+                            <option value="bone-march">Bone March</option>
+                            <option value="choir-silence">Choir of Silence</option>
+                            <option value="cult-withered-flame">Cult of the Withered Flame</option>
+                            <option value="gravewrought-court">Gravewrought Court</option>
+                            <option value="swarm-mireborn">Swarm of the Mireborn</option>
+                            <option value="dawnflame-order">DawnFlame Order</option>
+                            <option value="hollowed-redeemed">Hollowed Redeemed</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmationModal" class="delete-confirmation-modal">
+        <div class="delete-confirmation-content">
+            <h3>Delete Artwork</h3>
+            <p>Are you sure you want to delete "<span id="deleteArtworkTitle"></span>"? This action cannot be undone.</p>
+            <div class="delete-confirmation-actions">
+                <button class="btn btn-outline" id="cancelDeleteBtn">Cancel</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Customization Modal -->
+    <div id="themeCustomizationModal" class="modal">
+        <div class="modal-content theme-modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-palette"></i> Customize Your Profile Theme</h2>
+            
+            <div class="theme-presets">
+                <h3>Quick Presets</h3>
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-preset="default">Default</button>
+                    <button class="preset-btn" data-preset="dark">Dark</button>
+                    <button class="preset-btn" data-preset="warm">Warm</button>
+                    <button class="preset-btn" data-preset="cool">Cool</button>
+                    <button class="preset-btn" data-preset="neon">Neon</button>
+                    <button class="preset-btn" data-preset="earthy">Earthy</button>
+                </div>
+            </div>
+
+            <div class="theme-customization">
+                <h3>Custom Colors</h3>
+                <div class="color-controls">
+                    <div class="color-control">
+                        <label for="primaryColor">Primary Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="primaryColor" value="#374151">
+                            <input type="text" id="primaryColorText" placeholder="#374151" maxlength="7">
+                        </div>
+                    </div>
+                    
+                    <div class="color-control">
+                        <label for="accentColor">Accent Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="accentColor" value="#d1d5db">
+                            <input type="text" id="accentColorText" placeholder="#d1d5db" maxlength="7">
+                        </div>
+                    </div>
+                    
+                    <div class="color-control">
+                        <label for="backgroundColor">Background Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="backgroundColor" value="#111827">
+                            <input type="text" id="backgroundColorText" placeholder="#111827" maxlength="7">
+                        </div>
+                    </div>
+                    
+                    <div class="color-control">
+                        <label for="textColor">Text Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="textColor" value="#f9fafb">
+                            <input type="text" id="textColorText" placeholder="#f9fafb" maxlength="7">
+                        </div>
+                    </div>
+                    
+                    <div class="color-control">
+                        <label for="borderColor">Border Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="borderColor" value="#374151">
+                            <input type="text" id="borderColorText" placeholder="#374151" maxlength="7">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="theme-palette">
+                <h3>Color Palette</h3>
+                <div class="palette-grid" id="paletteGrid">
+                    <!-- Color palette will be generated dynamically -->
+                </div>
+            </div>
+
+            <div class="theme-preview">
+                <h3>Live Preview</h3>
+                <div class="preview-container">
+                    <div class="preview-card">
+                        <h4>Sample Card</h4>
+                        <p>This shows how your theme will look</p>
+                        <button class="btn btn-primary">Sample Button</button>
+                        <button class="btn btn-outline">Outline Button</button>
+                    </div>
+                    <div class="preview-elements">
+                        <div class="preview-element">
+                            <span class="preview-label">Text Colors:</span>
+                            <span class="preview-text-primary">Primary Text</span>
+                            <span class="preview-text-secondary">Secondary Text</span>
+                        </div>
+                        <div class="preview-element">
+                            <span class="preview-label">Backgrounds:</span>
+                            <div class="preview-bg-primary">Primary BG</div>
+                            <div class="preview-bg-secondary">Secondary BG</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="theme-actions">
+                <button class="btn btn-outline" id="resetThemeBtn">Reset to Default</button>
+                <button class="btn btn-outline" id="exportThemeBtn">Export Theme</button>
+                <button class="btn btn-outline" id="importThemeBtn">Import Theme</button>
+                <button class="btn btn-outline" id="themeHistoryBtn">Theme History</button>
+                <button class="btn btn-outline" id="compareThemesBtn">Compare Themes</button>
+                <button class="btn btn-primary" id="saveThemeBtn">Save Theme</button>
+            </div>
+            
+            <!-- Hidden file input for theme import -->
+            <input type="file" id="themeImportInput" accept=".json" style="display: none;">
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
+    <script src="profile.js?v=4"></script>
+</body>
+</html>

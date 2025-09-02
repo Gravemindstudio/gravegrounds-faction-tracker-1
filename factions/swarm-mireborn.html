@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swarm of the Mireborn - GraveGrounds Faction Tracker</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../index.html" style="text-decoration: none; color: inherit;">
+                        <span>GraveGrounds</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link" onclick="navigateToSection('home')">Home</a>
+                    <a href="../index.html" class="nav-link active" onclick="navigateToSection('factions')">Factions</a>
+                    <a href="../index.html" class="nav-link" onclick="navigateToSection('gallery')">Gallery</a>
+                    <a href="../index.html" class="nav-link" onclick="navigateToSection('profile')">Profile</a>
+                </div>
+                <div class="nav-auth">
+                    <button id="loginBtn" class="btn btn-outline">Login</button>
+                    <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Faction Hero Section -->
+            <section class="faction-hero swarm-mireborn-hero" style="background-image: url('../swarm of the mireborn.png'); background-size: cover; background-position: center 30%; background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="faction-hero-content">
+                        <div class="faction-hero-info">
+                            <div class="faction-icon-large swarm">
+                                <img src="../Faction Icons/Swarm of the Mireborn.png" alt="Swarm of the Mireborn Icon" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <h1 class="faction-title">Swarm of the Mireborn</h1>
+                            <p class="faction-tagline">Plague and Corruption Masters</p>
+                            <div class="faction-stats-hero">
+                                <div class="stat-item">
+                                    <span class="stat-number" data-faction="swarm-mireborn" data-stat="members">0</span>
+                                    <span class="stat-label">Members</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-faction="swarm-mireborn" data-stat="weekly">0</span>
+                                    <span class="stat-label">This Week</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-faction="swarm-mireborn" data-stat="rank">#7</span>
+                                    <span class="stat-label">Rank</span>
+                                </div>
+                            </div>
+                            <div class="faction-actions">
+                                <button class="btn btn-faction btn-swarm-mireborn btn-large">Join Swarm of the Mireborn</button>
+                                <button class="btn btn-outline btn-large" onclick="showFactionMembers('swarm-mireborn')">View Members</button>
+                            </div>
+                        </div>
+                        <div class="faction-hero-visual">
+                            <div class="faction-symbol">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Faction Details -->
+            <section class="faction-details">
+                <div class="container">
+                    <div class="details-grid">
+                        <div class="detail-card swarm-mireborn">
+                            <h3>Faction Lore</h3>
+                            <p>When the Veil shattered, the world bled. And where that blood seeped into the earth - the Swarm was born. It began in the low places: the mires, forgotten graves, and plague-pits no priest dared to sanctify. The first were accidents: a drowned child splitting open with a clutch of chittering larvae, or a battlefield rotting into a nest of bone-wasp and flesh-flies.</p>
+                            <p>No necromancer had cast spells here. The Veil's breaking had awakened the decay itself. And it remembered how to hunger. The Swarm does not simply kill. It recycles. Every death is a birth. Every grave is a cradle. They do not fight fair. They fight biologically. They out-breed, out-rot, outlast.</p>
+                        </div>
+                        
+                        <div class="detail-card swarm-mireborn">
+                            <h3>Abilities & Powers</h3>
+                            <ul class="ability-list">
+                                <li><strong>Organic Necromancy:</strong> Cast spells with bile, blood, and disease</li>
+                                <li><strong>Plague Glyphs:</strong> Sow fields with runes that hatch into carnivorous moss</li>
+                                <li><strong>Flesh-Wasp Hives:</strong> Summon swarms to strip armies to bone in hours</li>
+                                <li><strong>Hunger Hexes:</strong> Cause defenders to devour their own kin</li>
+                                <li><strong>Infection Breeding:</strong> Turn every corpse into a new horror</li>
+                            </ul>
+                        </div>
+
+                                                                                                  <div class="detail-card swarm-mireborn">
+                              <h3>Leadership</h3>
+                              <div class="leader-info">
+                                  <div class="leader-avatar">
+                                      <img src="../8 Faction Leaders/Rotmother.png" alt="The Rotmother" style="width: 200px; height: 200px; object-fit: cover; border-radius: 12px;">
+                                  </div>
+                                  <div class="leader-details">
+                                      <h4>The Rotmother</h4>
+                                      <p>She does not rule. She gestates. Buried deep in the belly of the Mirefang Swamps, a rotted mound of flesh the size of a cathedral heaves with every breath. Her skin is veined with black eggs, her mouth a ruin of teeth and birthing ducts.</p>
+                                      <span class="leader-title">The Unbirthed Queen</span>
+                                  </div>
+                              </div>
+                          </div>
+
+                        <div class="detail-card swarm-mireborn">
+                            <h3>Territory</h3>
+                            <p>The territories of the Swarm are impossible to cleanse. The trees weep pus, the rivers thicken with hatch-flesh, and the air buzzes with the wings of unborn things. Villages fall without battles: first the wells are tainted, then grain is seeded with plague, then infants cry with two mouths. By the time an army marches into the Mireborn's lands, they are already dead - they just don't know it yet.</p>
+                        </div>
+
+                        <div class="detail-card swarm-mireborn">
+                            <h3>Faction Philosophy</h3>
+                            <p>"You bury one. We birth a thousand. We are not mindless. We are guided by the Rotmother's hive-mind, by Mirelords who were once human sorcerers and warlords. Our necromancy is not clean. It is organic, rotting, alive. We cast spells not with words, but with bile, blood, and the squirming scripts of disease. We do not break kingdoms. We digest them."</p>
+                        </div>
+
+                        <div class="detail-card swarm-mireborn">
+                            <h3>Achievements</h3>
+                            <div class="achievement-list">
+                                <div class="achievement">
+                                    <span>Most Territory Underground</span>
+                                </div>
+                                <div class="achievement">
+                                    <span>Greatest Disease Spread</span>
+                                </div>
+                                <div class="achievement">
+                                    <span>Highest Swarm Numbers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Members -->
+            <section class="recent-members">
+                <div class="container">
+                    <h2 class="section-title">Recent Recruits</h2>
+                                         <div class="members-grid" id="recent-members-swarm-mireborn">
+                         <!-- Live member data will be populated here -->
+                     </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>GraveGrounds</h4>
+                        <p>Track your faction's power and build your necromancer identity.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="../index.html#home">Home</a></li>
+                            <li><a href="../index.html#factions">Factions</a></li>
+                            <li><a href="../index.html#gallery">Gallery</a></li>
+                            <li><a href="../index.html#profile">Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 GraveGrounds. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <form>
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+            </div>
+            <div id="signupForm" class="auth-form">
+                <form>
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupFaction">Choose Faction</label>
+                        <select id="signupFaction" required>
+                            <option value="">Select a faction...</option>
+                            <option value="bone-march">Bone March</option>
+                            <option value="choir-silence">Choir of Silence</option>
+                            <option value="cult-withered-flame">Cult of the Withered Flame</option>
+                            <option value="gravewrought-court">Gravewrought Court</option>
+                            <option value="swarm-mireborn" selected>Swarm of the Mireborn</option>
+                            <option value="dawnflame-order">DawnFlame Order</option>
+                            <option value="hollowed-redeemed">Hollowed Redeemed</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faction Members Modal -->
+    <div id="factionMembersModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="factionMembersTitle">Faction Members</h3>
+                <button class="modal-close" id="closeFactionMembersModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Loading State -->
+                <div class="loading-state" id="membersLoadingState" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Loading faction members...</p>
+                </div>
+                
+                <!-- No Members State -->
+                <div class="no-results" id="noMembersState" style="display: none;">
+                    <i class="fas fa-users"></i>
+                    <h3>No members found</h3>
+                    <p>This faction doesn't have any public members yet.</p>
+                </div>
+                
+                <!-- Members Grid -->
+                <div class="members-grid" id="factionMembersGrid">
+                    <!-- Member cards will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../faction-members.js"></script>
+    <script>
+        // API Configuration (shared with faction-members.js)
+        // const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://gravegrounds-faction-tracker-production.up.railway.app';
+        
+                // Function to fetch faction stats
+        async function fetchFactionStats(factionName) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/factions/${factionName}/stats`);
+                if (response.ok) {
+                    const stats = await response.json();
+                    updateFactionStats(factionName, stats);
+                } else {
+                    // If API fails, show zeros instead of random numbers
+                    updateFactionStats(factionName, {
+                        members: 0,
+                        weeklyGrowth: 0,
+                        rank: 7
+                    });
+                }
+            } catch (error) {
+                console.log('Using fallback stats for', factionName);
+                // Fallback to zeros if API is not available
+                updateFactionStats(factionName, {
+                    members: 0,
+                    weeklyGrowth: 0,
+                    rank: 7
+                });
+            }
+        }/api/factions/${factionName}/stats`);
+                if (response.ok) {
+                    const stats = await response.json();
+                    updateFactionStats(factionName, stats);
+                } else {
+                    // If API fails, show some realistic default numbers
+                    updateFactionStats(factionName, {
+                        members: Math.floor(Math.random() * 2000) + 500,
+                        weeklyGrowth: Math.floor(Math.random() * 100) + 10,
+                        rank: Math.floor(Math.random() * 7) + 1
+                    });
+                }
+            } catch (error) {
+                console.log('Using fallback stats for', factionName);
+                // Fallback to realistic numbers if API is not available
+                updateFactionStats(factionName, {
+                    members: Math.floor(Math.random() * 2000) + 500,
+                    weeklyGrowth: Math.floor(Math.random() * 100) + 10,
+                    rank: Math.floor(Math.random() * 7) + 1
+                });
+            }
+        }
+        
+                // Function to update the UI with faction stats
+        function updateFactionStats(factionName, stats) {
+            const membersElement = document.querySelector(`[data-faction="${factionName}"][data-stat="members"]`);
+            const weeklyElement = document.querySelector(`[data-faction="${factionName}"][data-stat="weekly"]`);
+            const rankElement = document.querySelector(`[data-faction="${factionName}"][data-stat="rank"]`);
+            
+            if (membersElement) {
+                // Handle both API response format and fallback format
+                const memberCount = stats.member_count || stats.members || 0;
+                membersElement.textContent = memberCount.toLocaleString();
+            }
+            if (weeklyElement) {
+                // Handle both API response format and fallback format
+                const weeklyGrowth = stats.weekly_growth || stats.weeklyGrowth || 0;
+                weeklyElement.textContent = weeklyGrowth > 0 ? `+${weeklyGrowth}` : weeklyGrowth.toString();
+            }
+            if (rankElement) {
+                // Handle both API response format and fallback format
+                const rank = stats.rank || 7;
+                rankElement.textContent = `#${rank}`;
+            }
+        }"][data-stat="members"]`);
+            const weeklyElement = document.querySelector(`[data-faction="${factionName}"][data-stat="weekly"]`);
+            const rankElement = document.querySelector(`[data-faction="${factionName}"][data-stat="rank"]`);
+            
+            if (membersElement) {
+                membersElement.textContent = stats.members.toLocaleString();
+            }
+            if (weeklyElement) {
+                weeklyElement.textContent = `+${stats.weeklyGrowth}`;
+            }
+            if (rankElement) {
+                rankElement.textContent = `#${stats.rank}`;
+            }
+        }
+        
+        function navigateToSection(section) {
+            // Store the target section in localStorage
+            localStorage.setItem('targetSection', section);
+            // Navigate to the main page
+            window.location.href = '../index.html';
+        }
+        
+        // Initialize faction stats when page loads
+        window.addEventListener('load', function() {
+            // Fetch stats for this faction
+            fetchFactionStats('swarm-mireborn');
+            
+            // Check if we need to scroll to a specific section after page load
+            const targetSection = localStorage.getItem('targetSection');
+            if (targetSection) {
+                localStorage.removeItem('targetSection');
+                // Small delay to ensure the page is fully loaded
+                setTimeout(() => {
+                    const section = document.querySelector(`#${targetSection}`);
+                    if (section) {
+                        const offsetTop = section.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
