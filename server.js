@@ -1297,15 +1297,28 @@ function updateFactionStats(faction, memberChange = 0, weeklyGrowthChange = 0) {
 
 // Health check endpoint for Railway
 app.get('/health', (req, res) => {
+  console.log('Health check requested from:', req.ip);
   res.status(200).json({ 
     status: 'healthy', 
     timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+    uptime: process.uptime(),
+    port: PORT,
+    host: HOST
   });
 });
 
 // Serve the main page
 app.get('/', (req, res) => {
+  // For Railway healthcheck, return a simple response
+  if (req.headers['user-agent'] && req.headers['user-agent'].includes('Railway')) {
+    return res.status(200).json({ 
+      status: 'ok', 
+      message: 'GraveGrounds Faction Tracker is running',
+      timestamp: new Date().toISOString()
+    });
+  }
+  
+  // For regular users, serve the HTML page
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
@@ -1776,6 +1789,9 @@ app.get('/api/maintenance/content-check', async (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 
+// Ensure we bind to 0.0.0.0 for Railway (not just localhost)
+const HOST = process.env.HOST || '0.0.0.0';
+
 // Security startup check
 console.log('🔒 Security Configuration Check:');
 console.log(`- NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
@@ -1790,11 +1806,12 @@ if (process.env.NODE_ENV === 'production') {
   console.log('🛠️  Starting in DEVELOPMENT mode');
 }
 
-server.listen(PORT, () => {
+server.listen(PORT, HOST, () => {
   console.log(`\n🎉 GraveGrounds Faction Tracker Server Started!`);
-  console.log(`📍 Server running on port ${PORT}`);
+  console.log(`📍 Server running on ${HOST}:${PORT}`);
   console.log(`🌐 Visit: http://localhost:${PORT}`);
   console.log(`📊 API: http://localhost:${PORT}/api/factions`);
+  console.log(`💚 Health: http://localhost:${PORT}/health`);
   console.log(`\n🔧 Ready for deployment! 🚀\n`);
 });
 
